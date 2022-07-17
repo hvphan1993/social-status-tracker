@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
+// const dateFormat = require('../utils/dateFormat');
 
 const UserSchema = new Schema(
   {
@@ -41,7 +41,7 @@ const UserSchema = new Schema(
   }
 );
 
-// get total count of comments and replies on retrieval
+// get total count of friends on retrieval
 UserSchema.virtual('friendCount').get(function() {
   return this.friends.length;
 });
