@@ -7,25 +7,31 @@ const {
   updateUser,
   deleteUser,
   addFriend,
-  deleteFriend
+  deleteFriend,
+  iLive
 } = require('../../controllers/user-controller.js');
+
+// /api/alive
+router
+  .route('/api/alive')
+  console.log("It works!");
 
 // /api/user
 router
-  .route('/api/users')
+  .route('/')
   .get(getAllUsers)
   .post(createUser);
 
 // /api/users/:id
 router
-  .route('/api/users/:userId')
+  .route('/:id')
   .get(getUserById)
   .put(updateUser)
   .delete(deleteUser);
 
 // Add and delete friends
 router
-    .route('/api/users/:userId/friends/:friendsId')
+    .route('/:id/friends/:friendsId')
     .post(addFriend)
     .delete(deleteFriend);
 
