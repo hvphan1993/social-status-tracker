@@ -51,12 +51,12 @@ const ThoughtSchema = new Schema(
   }
 );
 
-// get total count of reactions and replies on retrieval
-UserSchema.virtual("reactionCount").get(function () {
+// get total count of reactions on retrieval
+ThoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;
 });
 
-const User = model("Thought", ThoughtSchema);
+const Thought = model("Thought", ThoughtSchema);
 
 // export model
 module.exports = Thought;
