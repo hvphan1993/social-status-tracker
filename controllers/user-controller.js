@@ -61,18 +61,28 @@ const UserController = {
 
   // delete User and connected thoughts
   deleteUser({ params }, res) {
-    Thought.deleteMany({ userId: params.Id })
-        .then(() => {
-            User.findOneAndDelete({ _id: params.id })
-            .then(dbUserData => {
-                if (!dbUserData) {
-                    res.status(404).json({ message: 'No User found with this id!' });
-                    return;
-                }
-                res.json(dbUserData);
-            });
-        })
-      .catch(err => res.json(err));
+    User.findOneAndDelete({ _id: params.id })
+         .then(dbUserData => {
+            if (!dbUserData) {
+              res.status(404).json({ message: 'No User found with this id!' });
+                return;
+            }
+            // remove user from any friend list
+            User.updateMany(
+              { __id: {$in: dbUserData.friends } },
+              { $pull: { friends: params.id } }
+            )
+            .then(() => {
+              // remove user comments
+              Thought.deleteMany({ username: dbUserData.username })
+              .then(() => {
+                res.json({ message: "Successfully deleted user!" });
+              })
+              .catch(err => res.status(400).json(err));
+            })
+            .catch(err => res.status(400).json(err));
+            })
+        .catch(err => res.json(err));
   },
 
   // add friend to User
