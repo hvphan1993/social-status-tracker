@@ -22,3 +22,11 @@
 
 ## Demonstration of Application
 Walkthrough [video](https://drive.google.com/file/d/1GjdbbOB_JrbbHXO6p4NUYl36AiTyI4ic/view)
+
+## Screenshots
+
+Checking User Data
+![adding user](../social-network-api/assets/add%20user%20screenshot.png)
+
+Checking User Thoughts
+![checking user thoughts](../social-network-api/assets/get%20thoughts.png)
